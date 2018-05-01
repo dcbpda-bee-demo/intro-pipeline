@@ -9,8 +9,18 @@ pipeline {
         echo "${TEST_USER_USR}"
         echo "${TEST_USER_PSW}"
         echo "Hello ${params.Name}!"
-        sh '''java -version 
-'''
+        sh 'java -version '
+      }
+    }
+    stage('Deploy') {
+      options {
+        timeout(time: 30, unit: 'SECONDS')
+      }
+      input {
+        message 'Should we continue?'
+      }
+      steps {
+        echo 'Continuing with deployment'
       }
     }
   }
