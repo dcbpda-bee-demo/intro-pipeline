@@ -12,6 +12,25 @@ pipeline {
         sh 'java -version '
       }
     }
+      stage('Testing') {
+        failFast true
+        parallel {
+          stage('Java 8') {
+            agent { label 'jdk8' }
+            steps {
+              sh 'java -version'
+              sleep time: 2, unit: 'SECONDS'
+            }
+          }
+          stage('Java 9') {
+            agent { label 'jdk9' }
+            steps {
+              sh 'java -version'
+              sleep time: 4, unit: 'SECONDS'
+            }
+          }
+        }
+      }    
     stage('Get Kernel') {
       steps {
         script {
