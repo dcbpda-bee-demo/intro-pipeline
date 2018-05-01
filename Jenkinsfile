@@ -16,7 +16,7 @@ pipeline {
         failFast true
         parallel {
           stage('Java 8') {
-            agent { label 'jdk8' }
+            agent { label 'jdk9' }
             steps {
               sh 'java -version'
               sleep time: 2, unit: 'SECONDS'
